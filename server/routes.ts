@@ -38,11 +38,11 @@ import {
 } from "@shared/schema";
 
 if (!process.env.STRIPE_SECRET_KEY) {
-  throw new Error('Missing required Stripe secret: STRIPE_SECRET_KEY');
+  console.warn('⚠️  STRIPE_SECRET_KEY is not set - payment features will be unavailable');
 }
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY, {
+const stripe = process.env.STRIPE_SECRET_KEY ? new Stripe(process.env.STRIPE_SECRET_KEY, {
   apiVersion: "2025-07-30.basil",
-});
+}) : null;
 
 // Enhanced caching system
 const groupPricingCache = new Map<string, { amount: number; originalAmount: number; potentialSavings: number; totalMembers: number; timestamp: number }>();
