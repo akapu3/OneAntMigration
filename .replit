@@ -8,7 +8,7 @@ channel = "stable-24_05"
 [deployment]
 deploymentTarget = "autoscale"
 build = ["npm", "run", "build"]
-run = ["node", "./dist/index.cjs"]
+run = ["sh", "-c", "node ./dist/index.js"]
 
 [deployment.env]
 NODE_ENV = "production"
@@ -47,6 +47,7 @@ integrations = [
   "javascript_stripe:1.0.0",
   "javascript_log_in_with_replit:1.0.0",
 ]
+expertMode = true
 
 [userenv]
 
